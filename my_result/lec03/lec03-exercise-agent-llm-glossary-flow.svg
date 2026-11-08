@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="650" viewBox="0 0 1040 650">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#94a3b8"/>
+    </marker>
+    <marker id="red-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#fb7185"/>
+    </marker>
+    <style>
+      text { font-family: sans-serif; fill: #e2e8f0; }
+      .title { font-size: 23px; font-weight: 700; }
+      .body { font-size: 16px; }
+      .code { font-family: monospace; font-size: 15px; }
+      .muted { fill: #aab8ca; }
+      .box { fill: #202b3b; stroke: #53647b; stroke-width: 1.5; rx: 10; }
+      .llm { fill: #3b202b; stroke: #fb7185; stroke-width: 2.5; rx: 10; }
+      .data { fill: #172f36; stroke: #4aa6a2; stroke-width: 1.5; rx: 10; }
+    </style>
+  </defs>
+  <rect width="1040" height="650" fill="#111827"/>
+
+  <text x="34" y="46" class="title">用語集を使うエージェントの実行フロー</text>
+  <text x="34" y="76" class="body muted">JSONは実行されるのではなく、ツールが必要なときに読み込んで検索します。</text>
+
+  <rect x="34" y="108" width="972" height="68" class="box"/>
+  <text x="56" y="137" class="body">ターミナルで質問を実行</text>
+  <text x="56" y="160" class="code">uv run python -m app.agent "AIE2026の宿題にある3レベルとは？"</text>
+
+  <path d="M520 176 L520 205" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="34" y="216" width="972" height="92" class="box"/>
+  <text x="56" y="245" class="body">app/agent.py の main() がモデルを用意し、質問を実行</text>
+  <text x="56" y="272" class="code">build_model() → GoogleModel(MODEL, ...)</text>
+  <text x="56" y="294" class="code" fill="#fda4af">target.run_sync(args.question, model=build_model())  ← LLMへの問い合わせはここ</text>
+
+  <path d="M520 308 L520 342" stroke="#fb7185" stroke-width="2.5" marker-end="url(#red-arrow)"/>
+
+  <rect x="250" y="353" width="540" height="76" class="llm"/>
+  <text x="520" y="383" text-anchor="middle" class="body" font-weight="700">LLM（Gemini）に質問を送る</text>
+  <text x="520" y="408" text-anchor="middle" class="body muted">モデルが用語集ツールを使うと判断した場合、検索を依頼</text>
+
+  <path d="M520 429 L520 458" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="250" y="469" width="540" height="64" class="box"/>
+  <text x="520" y="497" text-anchor="middle" class="code">app/tools.py: search_glossary("3レベル")</text>
+  <text x="520" y="520" text-anchor="middle" class="body muted">用語名・別名を検索</text>
+
+  <path d="M520 533 L520 557" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="250" y="568" width="540" height="60" class="data"/>
+  <text x="520" y="594" text-anchor="middle" class="code">load_glossary() → data/glossary.json の terms</text>
+  <text x="520" y="617" text-anchor="middle" class="body muted">検索結果がLLMに戻り、回答が生成される</text>
+
+  <text x="34" y="620" class="body" fill="#fda4af">赤枠・矢印が、LLMへの問い合わせ箇所です。</text>
+</svg>
