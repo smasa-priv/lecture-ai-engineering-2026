@@ -1,0 +1,46 @@
+@smasa-priv ➜ /workspaces/lecture-ai-engineering-2026 (lec03) $  source /workspaces/lecture-ai-engineering-2026/.venv/bin/activate
+(aie2026-exercises) @smasa-priv ➜ /workspaces/lecture-ai-engineering-2026 (lec03) $ 
+(aie2026-exercises) @smasa-priv ➜ /workspaces/lecture-ai-engineering-2026 (lec03) $ 
+(aie2026-exercises) @smasa-priv ➜ /workspaces/lecture-ai-engineering-2026 (lec03) $ uv run python -m app.agent --list-tools
+モデルに見えているツール: 3 個
+
+[search_glossary]
+  講座の用語集から用語を検索し、定義と、どの回で扱うかを返す。
+  
+  AIエンジニアリングの用語や、この講座（AIE2026）に固有の言葉について
+  答える前に使うこと。query には調べたい用語を1つだけ入れる（例: "LoRA"）。
+  引数: {"query": {"type": "string"}}
+
+[get_lecture_summary]
+  指定した回（1始まりの整数）の講義の要点を返す。
+  
+  「第3回では何を学ぶ？」のように、回の内容や関係を聞かれたときに使う。
+  引数: {"lecture": {"type": "integer"}}
+
+[make_quiz]
+  指定した回の用語から1つ選び、復習用の確認問題と答えを返す。
+  
+  「第2回の確認問題を出して」のように、その回の学習内容を復習したいときに使う。
+  引数: {"lecture": {"type": "integer"}}
+(aie2026-exercises) @smasa-priv ➜ /workspaces/lecture-ai-engineering-2026 (lec03) $ 
+(aie2026-exercises) @smasa-priv ➜ /workspaces/lecture-ai-engineering-2026 (lec03) $ 
+(aie2026-exercises) @smasa-priv ➜ /workspaces/lecture-ai-engineering-2026 (lec03) $ uv run python -m app.agent --trace " 第2回の内容から確認問題を1問出して"
+[model] gemini-3.5-flash-lite
+第2回の内容から復習用の確認問題をお出しします！
+
+**【確認問題】**
+Q. ファインチューニングの意味は？
+
+ぜひ考えてみてくださいね。答えを確認したいときはいつでもお声がけください！
+
+（関連：第2回）
+
+--- trace ---
+[tool call]   make_quiz({'lecture': 2})
+[tool return] make_quiz -> {"question": "ファインチューニングの意味は？", "answer": "事前学習済みモデルを、特定のタスクや形式に合ったデータで追加学習させること。出力の形式や口調、特定ドメインの振る舞いを身につけさせるのに向く。最新の事実を…
+[usage] RunUsage(cost=Decimal('0.0004577'), details={'text_prompt_tokens': 934}, input_text_tokens=934, input_tokens=934, output_tokens=71, requests=2, tool_calls=1)
+(aie2026-exercises) @smasa-priv ➜ /workspaces/lecture-ai-engineering-2026 (lec03) $ 
+(aie2026-exercises) @smasa-priv ➜ /workspaces/lecture-ai-engineering-2026 (lec03) $ uv run pytest -q
+.................                                                                                                                                       [100%]
+17 passed in 4.44s
+(aie2026-exercises) @smasa-priv ➜ /workspaces/lecture-ai-engineering-2026 (lec03) $ 
