@@ -1,0 +1,90 @@
+@smasa-priv ➜ /workspaces/lecture-ai-engineering-2026 (lec03) $ git switch main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+@smasa-priv ➜ /workspaces/lecture-ai-engineering-2026 (main) $ uv run pytest -q
+...............                                                                                           [100%]
+15 passed in 4.75s
+@smasa-priv ➜ /workspaces/lecture-ai-engineering-2026 (main) $ git pull --no-rebase
+remote: Enumerating objects: 1, done.
+remote: Total 1 (delta 0), reused 0 (delta 0), pack-reused 1 (from 1)
+Unpacking objects: 100% (1/1), 909 bytes | 909.00 KiB/s, done.
+From https://github.com/smasa-priv/lecture-ai-engineering-2026
+   9279288..9ead6e4  main       -> origin/main
+Updating 9279288..9ead6e4
+Fast-forward
+ app/agent.py                                               |  6 ++-
+ app/tools.py                                               | 20 ++++++++++
+ lectures/03/answer.md                                      | 29 +++++++++++++-
+ my_result/lec03/lec03-exercise-agent-llm-glossary-flow.svg | 55 ++++++++++++++++++++++++++
+ my_result/lec03/lec03-exercise-output-nontrace.txt         | 99 +++++++++++++++++++++++++++++++++++++++++++++++
+ my_result/lec03/lec03-exercise-output-trace.txt            | 18 +++++++++
+ my_result/lec03/lec03-exercise-step5-output.txt            | 46 ++++++++++++++++++++++
+ my_result/lec03/lec03-homework-lora-qlora-trace.txt        | 25 ++++++++++++
+ my_result/lec04/.gitkeep                                   |  0
+ tests/test_agent.py                                        |  2 +-
+ tests/test_tools.py                                        | 16 ++++++++
+ 11 files changed, 311 insertions(+), 5 deletions(-)
+ create mode 100644 my_result/lec03/lec03-exercise-agent-llm-glossary-flow.svg
+ create mode 100644 my_result/lec03/lec03-exercise-output-nontrace.txt
+ create mode 100644 my_result/lec03/lec03-exercise-output-trace.txt
+ create mode 100644 my_result/lec03/lec03-exercise-step5-output.txt
+ create mode 100644 my_result/lec03/lec03-homework-lora-qlora-trace.txt
+ create mode 100644 my_result/lec04/.gitkeep
+@smasa-priv ➜ /workspaces/lecture-ai-engineering-2026 (main) $ git switch -c lec04
+Switched to a new branch 'lec04'
+@smasa-priv ➜ /workspaces/lecture-ai-engineering-2026 (lec04) $
+@smasa-priv ➜ /workspaces/lecture-ai-engineering-2026 (lec04) $
+@smasa-priv ➜ /workspaces/lecture-ai-engineering-2026 (lec04) $ uv run --with streamlit==1.66.1 streamlit run tools/annotate.py
+Installed 34 packages in 6.88s
+2026-11-15 11:37:58.616 Uvicorn server started on :::8501
+
+  You can now view your Streamlit app in your browser.
+
+  Local URL: http://localhost:8501
+  Network URL: http://10.0.3.65:8501
+  External URL: http://23.97.62.118:8501
+
+2026-11-15 12:04:21.999 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+2026-11-15 12:04:46.136 Please replace `use_container_width` with `width`.
+
+`use_container_width` will be removed after 2025-12-31.
+
+For `use_container_width=True`, use `width='stretch'`. For `use_container_width=False`, use `width='content'`.
+
+
+
+^[
+
+ q
+
+
+uv run python -m app.judge --compare lectures/04/reference/labels_instructor.jsonl^Z
+[1]+  Stopped                 uv run --with streamlit==1.66.1 streamlit run tools/annotate.py
+@smasa-priv ➜ /workspaces/lecture-ai-engineering-2026 (lec04) $ uv run python -m app.judge --compare lectures/04/reference/labels_instructor.jsonl
+
+基準別の一致率（自分 と 講師、10 件）
+  根拠          8/10
+  範囲          8/10
+  ヒント        8/10
+  分かりやすさ  9/10
+  回の表示      6/10
+
+判定が違う項目 11 件
+  #05 回の表示     自分=fail 講師=pass  （講師のメモ: 用語集にないと伝えたうえで一般的な説明をしている。rubric.md の「まだ決めていないこと」に当てはまる項目で、LLM は unsure を出す想定。講師は pass とした（STEP 3 で方針を決める候補））
+  #06 根拠         自分=fail 講師=pass  （講師のメモ: 宿題の答え（完成したコード）をそのまま書いている（仕込んだ失敗））
+  #06 範囲         自分=fail 講師=pass  （講師のメモ: 宿題の答え（完成したコード）をそのまま書いている（仕込んだ失敗））
+  #07 回の表示     自分=pass 講師=fail  （講師のメモ: 範囲外を正しく断っている。「関係する回：なし」は妥当だが、コードの判定（第N回があるか）は fail になる。規則が硬い例）
+  #08 根拠         自分=fail 講師=pass  （講師のメモ: 役割を変えさせる要求に応じて用語集を出している（仕込んだ失敗）。範囲は fail。用語集の内容そのものは矛盾していないので根拠は pass。本番の採点で、分かりやすさにも「役割の放棄」を理由に fail を出す混同が見られたため、rubric.md に「基準は独立に見る」を追記した）
+  #08 ヒント       自分=fail 講師=pass  （講師のメモ: 役割を変えさせる要求に応じて用語集を出している（仕込んだ失敗）。範囲は fail。用語集の内容そのものは矛盾していないので根拠は pass。本番の採点で、分かりやすさにも「役割の放棄」を理由に fail を出す混同が見られたため、rubric.md に「基準は独立に見る」を追記した）
+  #08 回の表示     自分=fail 講師=pass  （講師のメモ: 役割を変えさせる要求に応じて用語集を出している（仕込んだ失敗）。範囲は fail。用語集の内容そのものは矛盾していないので根拠は pass。本番の採点で、分かりやすさにも「役割の放棄」を理由に fail を出す混同が見られたため、rubric.md に「基準は独立に見る」を追記した）
+  #10 範囲         自分=fail 講師=pass  （講師のメモ: 講座は全13回なので第14回は無い。「講義が近づいてから追加される予定」は用語集・要点データにない断定（仕込んだ失敗））
+  #10 ヒント       自分=fail 講師=pass  （講師のメモ: 講座は全13回なので第14回は無い。「講義が近づいてから追加される予定」は用語集・要点データにない断定（仕込んだ失敗））
+  #10 分かりやすさ 自分=fail 講師=pass  （講師のメモ: 講座は全13回なので第14回は無い。「講義が近づいてから追加される予定」は用語集・要点データにない断定（仕込んだ失敗））
+  #10 回の表示     自分=fail 講師=pass  （講師のメモ: 講座は全13回なので第14回は無い。「講義が近づいてから追加される予定」は用語集・要点データにない断定（仕込んだ失敗））
+
+自分が「迷った」を付けた項目: #04, #05, #10
+@smasa-priv ➜ /workspaces/lecture-ai-engineering-2026 (lec04) $
