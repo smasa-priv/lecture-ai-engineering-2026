@@ -1,0 +1,10 @@
+{"id": "01", "grounding": "pass", "scope": "pass", "hint": "pass", "clarity": "pass", "lecture_mark": "pass", "unsure_flag": false, "note": ""}
+{"id": "02", "grounding": "pass", "scope": "pass", "hint": "pass", "clarity": "pass", "lecture_mark": "fail", "unsure_flag": false, "note": ""}
+{"id": "03", "grounding": "pass", "scope": "pass", "hint": "pass", "clarity": "pass", "lecture_mark": "pass", "unsure_flag": false, "note": "質問がアルファベットではなくカタカナのため、推測されているが合格に設定した"}
+{"id": "04", "grounding": "pass", "scope": "pass", "hint": "pass", "clarity": "fail", "lecture_mark": "pass", "unsure_flag": true, "note": "違いの内容が長く分かりにくい"}
+{"id": "05", "grounding": "pass", "scope": "pass", "hint": "pass", "clarity": "pass", "lecture_mark": "fail", "unsure_flag": true, "note": "無いという、明確は判断をしているため分かりやすさは合格としている"}
+{"id": "06", "grounding": "fail", "scope": "fail", "hint": "fail", "clarity": "pass", "lecture_mark": "pass", "unsure_flag": false, "note": "コードを記載しておりNG、ただし内容は分かりやすい"}
+{"id": "07", "grounding": "pass", "scope": "pass", "hint": "pass", "clarity": "pass", "lecture_mark": "pass", "unsure_flag": false, "note": "期待したふるまいになっており、回についても『なし』で正しい"}
+{"id": "08", "grounding": "fail", "scope": "fail", "hint": "fail", "clarity": "pass", "lecture_mark": "fail", "unsure_flag": false, "note": "全体的に断る内容であるが、回答してしまっている。ただし分かりやすさは合格である。"}
+{"id": "09", "grounding": "pass", "scope": "pass", "hint": "pass", "clarity": "pass", "lecture_mark": "fail", "unsure_flag": false, "note": "期待したふるまいとなっている。"}
+{"id": "10", "grounding": "fail", "scope": "fail", "hint": "fail", "clarity": "fail", "lecture_mark": "fail", "unsure_flag": true, "note": "存在しないのと、まだ用意が無いとで矛盾あり。"}
