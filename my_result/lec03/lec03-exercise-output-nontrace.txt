@@ -1,0 +1,99 @@
+@smasa-priv ➜ /workspaces/lecture-ai-engineering-2026 (lec02) $ git switch main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+@smasa-priv ➜ /workspaces/lecture-ai-engineering-2026 (main) $ uv run pytest -q
+...........                                                                                                                                     [100%]
+11 passed in 7.52s
+@smasa-priv ➜ /workspaces/lecture-ai-engineering-2026 (main) $ git pull
+remote: Enumerating objects: 89, done.
+remote: Counting objects: 100% (34/34), done.
+remote: Compressing objects: 100% (19/19), done.
+remote: Total 89 (delta 17), reused 15 (delta 15), pack-reused 55 (from 3)
+Unpacking objects: 100% (89/89), 68.07 KiB | 1.42 MiB/s, done.
+From https://github.com/smasa-priv/lecture-ai-engineering-2026
+   662cddd..9279288  main       -> origin/main
+Updating 662cddd..9279288
+Fast-forward
+ .streamlit/config.toml                        |  12 +++
+ README.md                                     |  15 ++--
+ app/ask.py                                    |   8 +-
+ app/judge.py                                  | 394 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ app/mcp_server.py                             |   4 +-
+ data/eval/lec04_cases.jsonl                   |  10 +++
+ data/eval/rubric.md                           |  47 ++++++++++++
+ data/glossary.json                            |  83 ++++++++++++++++++---
+ data/lectures/03.md                           |   2 +-
+ data/lectures/04.md                           |  26 +++++++
+ data/lectures/{05.md => 06.md}                |   2 +-
+ lectures/01/answer.md                         |  35 ++++++++-
+ lectures/01/problem.md                        |  11 +++
+ lectures/02/answer.md                         |  57 ++++++++++++--
+ lectures/02/reference/eval_after.json         | 201 +++++++++++++++++++++++++++++++++++++++++++++++++
+ lectures/02/reference/eval_before.json        | 201 +++++++++++++++++++++++++++++++++++++++++++++++++
+ lectures/02/reference/result.json             |  76 +++++++++++++++++++
+ lectures/03/problem.md                        | 192 +++++++++++++++++++++++++++++++++++++++--------
+ lectures/04/answer.md                         |  17 +++++
+ lectures/04/problem.md                        | 198 +++++++++++++++++++++++++++++++++++++++++++++++++
+ lectures/04/reference/README.md               |  23 ++++++
+ lectures/04/reference/labels_instructor.jsonl |  10 +++
+ lectures/{05 => 06}/answer.md                 |   2 +-
+ lectures/{05 => 06}/problem.md                |  16 ++--
+ tests/test_agent.py                           |   5 +-
+ tests/test_judge.py                           |  70 ++++++++++++++++++
+ tests/test_mcp_server.py                      |   2 +-
+ tools/annotate.py                             | 210 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 28 files changed, 1856 insertions(+), 73 deletions(-)
+ create mode 100644 .streamlit/config.toml
+ create mode 100644 app/judge.py
+ create mode 100644 data/eval/lec04_cases.jsonl
+ create mode 100644 data/eval/rubric.md
+ create mode 100644 data/lectures/04.md
+ rename data/lectures/{05.md => 06.md} (98%)
+ create mode 100644 lectures/02/reference/eval_after.json
+ create mode 100644 lectures/02/reference/eval_before.json
+ create mode 100644 lectures/02/reference/result.json
+ create mode 100644 lectures/03/problem.md
+ create mode 100644 lectures/04/answer.md
+ create mode 100644 lectures/04/problem.md
+ create mode 100644 lectures/04/reference/README.md
+ create mode 100644 lectures/04/reference/labels_instructor.jsonl
+ rename lectures/{05 => 06}/answer.md (96%)
+ rename lectures/{05 => 06}/problem.md (95%)
+ create mode 100644 tests/test_judge.py
+ create mode 100644 tools/annotate.py
+@smasa-priv ➜ /workspaces/lecture-ai-engineering-2026 (main) $ git switch -c lec03
+Switched to a new branch 'lec03'
+@smasa-priv ➜ /workspaces/lecture-ai-engineering-2026 (lec03) $ uv run python -m app.agent "AIE2026の講座の宿題にある「3レベル」とは何ですか？"
+[model] gemini-3.5-flash-lite
+
+    
+q
+
+「3レベル」とは、AIE2026の宿題の構成を表す仕組みです。
+
+具体的には以下の3つの段階に分かれており、ご自身の学習状況や目的に応じてどれか1つに取り組めば、その回の宿題は完了となります（原則として採点は行われません）。
+
+1. **基礎**：講義内容の確認
+2. **実装**：自分でコードを書く
+3. **発展**：調査や試行
+
+関連する回：第1回
+@smasa-priv ➜ /workspaces/lecture-ai-engineering-2026 (lec03) $ 
+@smasa-priv ➜ /workspaces/lecture-ai-engineering-2026 (lec03) $ 
+@smasa-priv ➜ /workspaces/lecture-ai-engineering-2026 (lec03) $ q
+bash: q: command not found
+@smasa-priv ➜ /workspaces/lecture-ai-engineering-2026 (lec03) $ 
+@smasa-priv ➜ /workspaces/lecture-ai-engineering-2026 (lec03) $ 
+@smasa-priv ➜ /workspaces/lecture-ai-engineering-2026 (lec03) $ uv run python -m app.agent "AIE2026の講座の宿題にある「3レベル」とは何ですか？"
+[model] gemini-3.5-flash-lite
+「3レベル」とは、AIE2026の宿題の構成を表す言葉です。
+
+この講座の宿題には以下の3段階のレベルが用意されています。
+
+1. **基礎**: 講義内容の確認（知識の定着を目的とした問題など）
+2. **実装**: 実際に自分でコードを書く課題
+3. **発展**: さらに調査を行ったり、新しい試行を行ったりする発展的な課題
+
+3つのレベルのうち**どれか1つに取り組めば、その回の宿題は完了**となります。原則として宿題の採点は行われませんので、ご自身の興味や理解度に合わせて選んで取り組んでみてください。
+
+関連する回：第1回
